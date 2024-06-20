@@ -25,17 +25,17 @@ function App() {
 
   return (
     <>
-      <div className='h-[65vh] w-[37vw] border-[2px] bg-gray-700 mx-[20rem] rounded-xl my-20'>
-      <div className=' h-[46vh] w-[32vw] mx-8 my-5 '>
-        <img src={images[Image]} className=" shadow-2xl position-center bg-contain rounded-xl" />
-      </div>
+      <div className=' h-[65vh] md:w-[37vw] border-[2px] bg-gray-700 md:mx-[20rem] rounded-xl my-20 position-relative'>
+        <div className='  w-[32vw] mx-auto my-5 '>
+          <img src={images[Image]} className=" shadow-2xl position-center bg-contain rounded-xl" />
+        </div>
 
-      <div className=' flex justify-between h-[10vh] w-[32vw] mx-8 '>
-        <button onClick={Left} disabled={Image==0} className='h-[7vh] w-[13vh] bg-blue-300 rounded-lg text-lg font-medium my-2'><span>&lt;</span>Left</button>
-        <p className='text-white text-xl my-4'>{Image+1}/6</p>
-        <button onClick={Right} disabled={Image==5} className='h-[7vh] w-[13vh] bg-blue-300 rounded-lg text-lg font-medium my-2'>Right<span>&gt;</span> </button>
+        <div className=' flex justify-between gap-4  md:h-[10vh] md:w-[30vw] md:mx-12 '>
+          <button onClick={Left} disabled={Image==0} className='h-[7vh] w-[13vh] bg-blue-300 rounded-lg text-lg font-medium md:my-2'><span>&lt;</span>Left</button>
+          <p className='text-white text-xl my-4'>{Image+1}/6</p>
+          <button onClick={Right} disabled={Image==5} className='h-[7vh] w-[13vh] bg-blue-300 rounded-lg text-lg font-medium md:my-2'>Right<span>&gt;</span> </button>
 
-      </div>
+        </div>
 
       </div>
 
