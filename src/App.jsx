@@ -14,35 +14,35 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setImage((prevImage) => (prevImage + 1) % images.length);
-    }, 3000);
+      setImage((prevImage) => (prevImage + 1) % 6);
+    }, 3000); 
 
     return () => clearInterval(interval);
   }, []);
 
   const Right = () => {
-    setImage((prevImage) => (prevImage + 1) % images.length);
+    setImage((prevImage) => (prevImage + 1) % 6);
   };
 
   const Left = () => {
-    setImage((prevImage) => (prevImage - 1 + images.length) % images.length);
+    setImage((prevImage) => (prevImage - 1 + images.length) % 6);
   };
 
-  const hover = () => {
+  const onhover = () => {
     clearInterval(intervalRef.current);
   };
 
-  const nohover = () => {
+  const onleave = () => {
     intervalRef.current = setInterval(() => {
-      setImage((prevImage) => (prevImage + 1) % images.length);
+      setImage((prevImage) => (prevImage + 1) % 6);
     }, 3000);
   };
 
-  const intervalRef = useRef();
+  const intervalRef = useRef(null);
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
-      setImage((prevImage) => (prevImage + 1) % images.length);
+      setImage((prevImage) => (prevImage + 1) % 6);
     }, 3000);
 
     return () => clearInterval(intervalRef.current);
@@ -51,8 +51,8 @@ function App() {
   return (
     <div
       className="h-[65vh] md:w-[37vw] border-[2px] bg-gray-700 md:mx-[26rem] rounded-xl my-20 position-relative"
-      onMouseEnter={hover}
-      onMouseLeave={nohover}
+      onMouseEnter={onhover}
+      onMouseLeave={onleave}
     >
       <div className="w-[32vw] mx-auto my-5">
         <img
