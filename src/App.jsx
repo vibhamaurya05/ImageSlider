@@ -12,47 +12,46 @@ function App() {
     "https://images.pexels.com/photos/207172/pexels-photo-207172.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setImage((prevImage) => (prevImage + 1) % 6);
-    }, 3000); 
+  const intervalRef = useRef(null);
 
-    return () => clearInterval(interval);
+  const startInterval = () => {
+    intervalRef.current = setInterval(() => {
+      setImage((prevImage) => (prevImage + 1) % images.length);
+    }, 1000);
+  };
+
+  const stopInterval = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  };
+
+  useEffect(() => {
+    startInterval();
+    return () => stopInterval();
   }, []);
 
   const Right = () => {
-    setImage((prevImage) => (prevImage + 1) % 6);
+    setImage((prevImage) => (prevImage + 1) % images.length);
   };
 
   const Left = () => {
-    setImage((prevImage) => (prevImage - 1 + images.length) % 6);
+    setImage((prevImage) => (prevImage - 1 + images.length) % images.length);
   };
 
-  const onhover = () => {
-    clearInterval(intervalRef.current);
+  const onHover = () => {
+    stopInterval();
   };
 
-  const onleave = () => {
-    intervalRef.current = setInterval(() => {
-      setImage((prevImage) => (prevImage + 1) % 6);
-    }, 3000);
+  const onLeave = () => {
+    startInterval();
   };
-
-  const intervalRef = useRef(null);
-
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setImage((prevImage) => (prevImage + 1) % 6);
-    }, 3000);
-
-    return () => clearInterval(intervalRef.current);
-  }, []);
 
   return (
     <div
       className="h-[65vh] md:w-[37vw] border-[2px] bg-gray-700 md:mx-[26rem] rounded-xl my-20 position-relative"
-      onMouseEnter={onhover}
-      onMouseLeave={onleave}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
     >
       <div className="w-[32vw] mx-auto my-5">
         <img
@@ -65,7 +64,6 @@ function App() {
       <div className="flex justify-between gap-4 md:h-[10vh] md:w-[30vw] md:mx-12">
         <button
           onClick={Left}
-          disabled={Image === 0}
           className="h-[7vh] w-[13vh] bg-blue-300 rounded-lg text-lg font-medium md:my-2"
         >
           <span>&lt;</span>Left
@@ -73,7 +71,6 @@ function App() {
         <p className="text-white text-xl my-4">{Image + 1}/6</p>
         <button
           onClick={Right}
-          disabled={Image === images.length - 1}
           className="h-[7vh] w-[13vh] bg-blue-300 rounded-lg text-lg font-medium md:my-2"
         >
           Right<span>&gt;</span>
@@ -84,3 +81,4 @@ function App() {
 }
 
 export default App;
+
